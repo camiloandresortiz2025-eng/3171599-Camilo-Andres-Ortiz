@@ -1,9 +1,9 @@
-# 💸 Sistema de Remesas Internacionales
+# Sistema de Remesas Internacionales
 
-## 📋 Dominio
+## Dominio
 Sistema de envío de dinero internacional (remesas) para servicios financieros y fintech. Permite a usuarios enviar dinero a familiares y amigos en otros países.
 
-## 🏷️ Entidades Modeladas
+## Entidades Modeladas
 
 ### Principales
 - **Sender (Remitente)**: Persona que envía dinero, con verificación KYC
@@ -16,7 +16,7 @@ Sistema de envío de dinero internacional (remesas) para servicios financieros y
 - `DeliveryMethod`: Métodos de entrega (bank_transfer, cash_pickup, mobile_wallet, home_delivery)
 - `IdentificationType`: Tipos de identificación para KYC
 
-## 🔧 Funciones Implementadas
+## Funciones Implementadas
 
 | Función | Descripción |
 |---------|-------------|
@@ -31,7 +31,7 @@ Sistema de envío de dinero internacional (remesas) para servicios financieros y
 | `findByReferenceCode()` | Busca remesa por código de rastreo |
 | `calculateTotalSentBySender()` | Calcula total enviado por un remitente |
 
-## 💡 Decisiones de Diseño
+## Decisiones de Diseño
 
 1. **Separación Sender/Recipient**: Aunque ambos extienden `Person`, tienen propiedades específicas para sus roles.
 
@@ -43,7 +43,7 @@ Sistema de envío de dinero internacional (remesas) para servicios financieros y
 
 5. **Tipos estrictos**: Uso de type literals para monedas, estados y métodos previene errores.
 
-## ▶️ Ejecución
+## Ejecución
 
 ```bash
 cd FU/weet-1
@@ -51,7 +51,7 @@ pnpm install
 pnpm start
 ```
 
-## ✅ Checklist
+## Checklist
 
 - [x] Definí interfaces y types para entidades
 - [x] Implementé funciones con tipos explícitos
