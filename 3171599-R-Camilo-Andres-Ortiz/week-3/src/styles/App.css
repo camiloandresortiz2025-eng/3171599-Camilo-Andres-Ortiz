@@ -1,0 +1,626 @@
+/* ============================================
+   ESTILOS — RemesasPay Dashboard
+   Sistema de Remesas Internacionales (Fintech)
+   ============================================ */
+
+/* === RESET Y BASE === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen,
+    Ubuntu, Cantarell, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #0f1923;
+  color: #e1e8ed;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* === DASHBOARD LAYOUT === */
+.dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  background: linear-gradient(135deg, #1a2332 0%, #0d253f 100%);
+  padding: 16px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #00d4aa;
+  box-shadow: 0 2px 12px rgba(0, 212, 170, 0.15);
+}
+
+.header-brand h1 {
+  font-size: 1.6rem;
+  color: #00d4aa;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.brand-subtitle {
+  font-size: 0.8rem;
+  color: #7a8a9e;
+  display: block;
+  margin-top: 2px;
+}
+
+.refresh-btn {
+  background: rgba(0, 212, 170, 0.15);
+  color: #00d4aa;
+  border: 1px solid rgba(0, 212, 170, 0.3);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.refresh-btn:hover {
+  background: rgba(0, 212, 170, 0.25);
+  border-color: #00d4aa;
+}
+
+.dashboard-main {
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  flex: 1;
+}
+
+.stats-section {
+  grid-column: 1 / 9;
+}
+
+.realtime-section {
+  grid-column: 9 / 13;
+}
+
+.list-section {
+  grid-column: 1 / 13;
+}
+
+@media (max-width: 1023px) {
+  .dashboard-main {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .stats-section,
+  .realtime-section,
+  .list-section {
+    grid-column: 1 / 13;
+  }
+}
+
+.dashboard-footer {
+  background: #1a2332;
+  color: #5a6a7e;
+  text-align: center;
+  padding: 16px;
+  font-size: 0.8rem;
+  border-top: 1px solid #2a3a4e;
+}
+
+/* === STATS CARD === */
+.stats-card {
+  background: linear-gradient(145deg, #1a2332, #1e2d3f);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #2a3a4e;
+}
+
+.stats-card h2 {
+  color: #e1e8ed;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.stat {
+  text-align: center;
+  padding: 20px 12px;
+  background: rgba(0, 212, 170, 0.05);
+  border-radius: 10px;
+  border: 1px solid #2a3a4e;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.stat:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 212, 170, 0.3);
+}
+
+.stat-icon {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00d4aa;
+  margin-bottom: 6px;
+}
+
+.stat-value.active-value {
+  color: #ffa726;
+}
+
+.stat-value.volume-value {
+  color: #42a5f5;
+  font-size: 1.5rem;
+}
+
+.stat-value.rate-value {
+  color: #66bb6a;
+}
+
+.stat-label {
+  font-size: 0.78rem;
+  color: #7a8a9e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.stat-loading {
+  color: #5a6a7e;
+  animation: pulse 1s infinite;
+}
+
+/* === REAL-TIME INDICATOR === */
+.realtime-indicator {
+  background: linear-gradient(145deg, #0d253f, #132b47);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #00d4aa33;
+  box-shadow: 0 4px 20px rgba(0, 212, 170, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.realtime-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.realtime-header h2 {
+  font-size: 1.1rem;
+  color: #e1e8ed;
+  font-weight: 600;
+}
+
+.updating-badge {
+  background: rgba(255, 167, 38, 0.2);
+  color: #ffa726;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  animation: pulse 1s infinite;
+}
+
+.realtime-loading {
+  text-align: center;
+  padding: 30px 0;
+  color: #7a8a9e;
+}
+
+.realtime-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.realtime-rate {
+  text-align: center;
+}
+
+.rate-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #7a8a9e;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.rate-value {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: #00d4aa;
+  display: block;
+  letter-spacing: -1px;
+}
+
+.realtime-metrics {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+}
+
+.rt-metric {
+  text-align: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  min-width: 70px;
+}
+
+.rt-metric-value {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #42a5f5;
+}
+
+.rt-metric-label {
+  display: block;
+  font-size: 0.65rem;
+  color: #7a8a9e;
+  text-transform: uppercase;
+  margin-top: 4px;
+  letter-spacing: 0.3px;
+}
+
+.realtime-timestamp {
+  font-size: 0.75rem;
+  color: #5a6a7e;
+}
+
+.next-update {
+  font-size: 0.7rem;
+  color: #4a5a6e;
+}
+
+.progress-bar {
+  margin-top: 16px;
+  height: 3px;
+  background: rgba(0, 212, 170, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #00d4aa;
+  width: 100%;
+  transform-origin: right;
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* === ITEM LIST (Remesas) === */
+.item-list {
+  background: linear-gradient(145deg, #1a2332, #1e2d3f);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid #2a3a4e;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.list-header h2 {
+  color: #e1e8ed;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.item-count {
+  color: #7a8a9e;
+  font-size: 0.85rem;
+}
+
+.item-count strong {
+  color: #00d4aa;
+}
+
+/* Barra de búsqueda */
+.search-bar {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 14px;
+  background: #0f1923;
+  border: 1px solid #2a3a4e;
+  border-radius: 8px;
+  color: #e1e8ed;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: #5a6a7e;
+}
+
+.search-input:focus {
+  border-color: #00d4aa;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #7a8a9e;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 4px;
+}
+
+.clear-btn:hover {
+  color: #e1e8ed;
+}
+
+/* Lista de tarjetas de remesas */
+.items {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.item-card {
+  background: #0f1923;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid #2a3a4e;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.item-card:hover {
+  border-color: rgba(0, 212, 170, 0.4);
+  transform: translateY(-1px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.remittance-id {
+  font-size: 0.8rem;
+  color: #5a6a7e;
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+}
+
+.status-badge {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.status-pending {
+  background: rgba(255, 167, 38, 0.15);
+  color: #ffa726;
+}
+
+.status-processing {
+  background: rgba(66, 165, 245, 0.15);
+  color: #42a5f5;
+}
+
+.status-transit {
+  background: rgba(171, 71, 188, 0.15);
+  color: #ab47bc;
+}
+
+.status-completed {
+  background: rgba(102, 187, 106, 0.15);
+  color: #66bb6a;
+}
+
+.status-cancelled {
+  background: rgba(120, 120, 120, 0.15);
+  color: #9e9e9e;
+}
+
+.status-failed {
+  background: rgba(239, 83, 80, 0.15);
+  color: #ef5350;
+}
+
+.card-corridor {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  background: rgba(0, 212, 170, 0.05);
+  border-radius: 6px;
+}
+
+.country {
+  font-size: 0.85rem;
+  color: #e1e8ed;
+  font-weight: 500;
+}
+
+.arrow {
+  color: #00d4aa;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.card-people {
+  margin-bottom: 12px;
+  font-size: 0.82rem;
+  color: #a0b0c0;
+  line-height: 1.6;
+}
+
+.card-people strong {
+  color: #c0d0e0;
+}
+
+.card-amounts {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 10px;
+  background: rgba(66, 165, 245, 0.05);
+  border-radius: 6px;
+}
+
+.amount-sent,
+.amount-received {
+  text-align: center;
+  flex: 1;
+}
+
+.amount-label {
+  display: block;
+  font-size: 0.65rem;
+  color: #7a8a9e;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+
+.amount-value {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e1e8ed;
+}
+
+.arrow-amount {
+  color: #42a5f5;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #2a3a4e;
+}
+
+.method {
+  font-size: 0.75rem;
+  color: #7a8a9e;
+}
+
+.fee {
+  font-size: 0.78rem;
+  color: #ffa726;
+  font-weight: 600;
+}
+
+/* === ESTADOS DE LOADING Y ERROR === */
+.loading-spinner {
+  text-align: center;
+  padding: 40px 0;
+  color: #7a8a9e;
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #2a3a4e;
+  border-top-color: #00d4aa;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 12px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message {
+  text-align: center;
+  padding: 30px 0;
+  color: #ef5350;
+}
+
+.error-message button {
+  margin-top: 12px;
+  background: rgba(239, 83, 80, 0.15);
+  color: #ef5350;
+  border: 1px solid rgba(239, 83, 80, 0.3);
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.error-message button:hover {
+  background: rgba(239, 83, 80, 0.25);
+}
+
+.item-list.error {
+  border-color: rgba(239, 83, 80, 0.3);
+}
+
+/* === ANIMACIÓN PULSE === */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
