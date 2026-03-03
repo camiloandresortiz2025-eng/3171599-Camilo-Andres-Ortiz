@@ -1,0 +1,621 @@
+/* ============================================
+   ESTILOS GLOBALES - Sistema de Remesas Internacionales
+   Dominio: Servicios Financieros y Fintech
+   ============================================ */
+
+/* Reset y variables CSS */
+:root {
+  --color-primary: #1a73e8;
+  --color-primary-light: #e8f0fe;
+  --color-primary-dark: #1557b0;
+  --color-success: #0f9d58;
+  --color-success-light: #e6f4ea;
+  --color-warning: #f9ab00;
+  --color-warning-light: #fef7e0;
+  --color-danger: #d93025;
+  --color-danger-light: #fce8e6;
+  --color-transit: #7c4dff;
+  --color-transit-light: #ede7f6;
+  --color-urgent: #ff6d00;
+  --color-urgent-light: #fff3e0;
+  --color-bg: #f8f9fa;
+  --color-surface: #ffffff;
+  --color-text: #202124;
+  --color-text-secondary: #5f6368;
+  --color-border: #dadce0;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1), 0 4px 6px rgba(0,0,0,0.05);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --transition: 0.2s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+/* ============================================
+   APP Container
+   ============================================ */
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* ============================================
+   CATALOG
+   ============================================ */
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.catalog-header {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  border-radius: var(--radius-lg);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.catalog-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.catalog-header__subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+/* ============================================
+   SEARCH BAR
+   ============================================ */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 4px 12px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition);
+}
+
+.search-bar:focus-within {
+  border-color: var(--color-primary);
+}
+
+.search-bar__icon {
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
+.search-bar__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 8px;
+  font-size: 1rem;
+  background: transparent;
+  color: var(--color-text);
+}
+
+.search-bar__input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.search-bar__clear {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--color-text-secondary);
+  border-radius: 50%;
+  transition: background var(--transition);
+}
+
+.search-bar__clear:hover {
+  background: var(--color-bg);
+}
+
+/* ============================================
+   CONTROLS (Filtros + Ordenamiento)
+   ============================================ */
+.controls {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   FILTER PANEL
+   ============================================ */
+.filter-panel {
+  flex: 1;
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  background: var(--color-surface);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.filter-select,
+.sort-select {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+
+.filter-select:focus,
+.sort-select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 8px 0;
+  white-space: nowrap;
+}
+
+.filter-checkbox input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.filter-group--range label {
+  margin-bottom: 2px;
+}
+
+.filter-range {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-range__separator {
+  color: var(--color-text-secondary);
+}
+
+.filter-input {
+  width: 90px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  transition: border-color var(--transition);
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+/* ============================================
+   SORT SELECTOR
+   ============================================ */
+.sort-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--color-surface);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.sort-selector label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition);
+  font-weight: 500;
+}
+
+.btn-clear {
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-clear:hover {
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn-view {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.btn-view:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+.btn-delete {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.btn-delete:hover {
+  background: var(--color-danger);
+  color: white;
+}
+
+/* ============================================
+   RESULTS SUMMARY
+   ============================================ */
+.results-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 12px 16px;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.results-count {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.results-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.results-stats strong {
+  color: var(--color-primary);
+}
+
+/* ============================================
+   ITEM LIST
+   ============================================ */
+.item-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+/* ============================================
+   ITEM CARD
+   ============================================ */
+.item-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  transition: all var(--transition);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.item-card--urgent {
+  border-left: 4px solid var(--color-urgent);
+}
+
+.item-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-card__amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge--completed {
+  background: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.badge--transit {
+  background: var(--color-transit-light);
+  color: var(--color-transit);
+}
+
+.badge--pending {
+  background: var(--color-warning-light);
+  color: #e37400;
+}
+
+.badge--cancelled {
+  background: var(--color-danger-light);
+  color: var(--color-danger);
+}
+
+.badge--urgent {
+  background: var(--color-urgent);
+  color: white;
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  font-size: 0.72rem;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* Ruta de la remesa */
+.item-card__route {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: var(--color-bg);
+  border-radius: var(--radius-sm);
+}
+
+.item-card__person {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item-card__label {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.item-card__value {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.item-card__country {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+}
+
+.item-card__arrow {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+/* Detalles financieros */
+.item-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item-card__detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  padding: 2px 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.item-card__detail:last-child {
+  border-bottom: none;
+}
+
+.item-card__detail-label {
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.item-card__received {
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+/* Acciones de la tarjeta */
+.item-card__actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.item-card__actions .btn {
+  flex: 1;
+  text-align: center;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.empty-state__icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.empty-state__title {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+}
+
+.empty-state__message {
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+
+/* ============================================
+   ERROR STATE
+   ============================================ */
+.error-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: var(--color-danger-light);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-danger);
+}
+
+.error-state__icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* ============================================
+   LOADING SPINNER
+   ============================================ */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 16px;
+}
+
+.loading-spinner__circle {
+  width: 48px;
+  height: 48px;
+  border: 4px solid var(--color-border);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-spinner__text {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .app {
+    padding: 12px;
+  }
+
+  .catalog-header h1 {
+    font-size: 1.4rem;
+  }
+
+  .controls {
+    flex-direction: column;
+  }
+
+  .filter-panel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .item-list {
+    grid-template-columns: 1fr;
+  }
+
+  .item-card__route {
+    flex-direction: column;
+  }
+
+  .item-card__arrow {
+    transform: rotate(90deg);
+  }
+
+  .results-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .results-stats {
+    flex-direction: column;
+    gap: 4px;
+  }
+}
